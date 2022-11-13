@@ -89,7 +89,7 @@ let zipCodes = [
   "78296",
   "78297",
   "78298",
-  "78299"
+  "78299",
 ];
 
 let addressDates = [];
@@ -101,7 +101,7 @@ async function main() {
   }
 
   await Promise.all(searchZipCodePromises);
-  
+
   let uniqueAddressDates = getUniqueListBy(addressDates, "address");
   for (let addressDate of uniqueAddressDates) {
     console.log(addressDate.date, addressDate.address);
@@ -125,19 +125,19 @@ function fetchZipCode(zipCode) {
   return fetch("https://publicapi.txdpsscheduler.com/api/AvailableLocation", {
     method: "POST",
     headers: {
-      "Origin": "https://public.txdpsscheduler.com",
+      Origin: "https://public.txdpsscheduler.com",
     },
     body: JSON.stringify({
       TypeId: 71,
       ZipCode: zipCode,
       CityName: "",
-      PreferredDay: 0
+      PreferredDay: 0,
     }),
   });
 }
 
 function getUniqueListBy(arr, key) {
-  return [...new Map(arr.map(item => [item[key], item])).values()]
+  return [...new Map(arr.map((item) => [item[key], item])).values()];
 }
 
 main();
